@@ -1,3 +1,5 @@
+import Rate from '../rate/rate';
+
 const ProductCard = (): JSX.Element => (
   <div className="product-card">
     <div className="product-card__img">
@@ -7,25 +9,7 @@ const ProductCard = (): JSX.Element => (
       </picture>
     </div>
     <div className="product-card__info">
-      <div className="rate product-card__rate">
-        <svg width="17" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
-        </svg>
-        <svg width="17" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
-        </svg>
-        <svg width="17" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
-        </svg>
-        <svg width="17" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-star"></use>
-        </svg>
-        <svg width="17" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-star"></use>
-        </svg>
-        <p className="visually-hidden">Рейтинг: 3</p>
-        <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>23</p>
-      </div>
+      <Rate placeInContent="product-card__rate" />
       <p className="product-card__title">Ретрокамера «Das Auge IV»</p>
       <p className="product-card__price"><span className="visually-hidden">Цена:</span>73 450 ₽
       </p>
