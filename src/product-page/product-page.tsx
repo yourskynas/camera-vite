@@ -1,6 +1,7 @@
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import Footer from '../footer/footer';
 import Header from '../header/header';
+import { camera } from '../mocks/camera';
 import Rate from '../rate/rate';
 import Review from '../review/review';
 
@@ -9,7 +10,7 @@ const ProductPage = (): JSX.Element => (
     <Header />
     <main>
       <div className="page-content">
-        <Breadcrumbs />
+        <Breadcrumbs cameraName={camera.name} />
         <div className="page-content__section">
           <section className="product">
             <div className="container">
@@ -20,9 +21,9 @@ const ProductPage = (): JSX.Element => (
                 </picture>
               </div>
               <div className="product__content">
-                <h1 className="title title--h3">Ретрокамера «Das Auge IV»</h1>
+                <h1 className="title title--h3">{camera.name}</h1>
                 <Rate placeInContent='product__rate' />
-                <p className="product__price"><span className="visually-hidden">Цена:</span>73 450 ₽</p>
+                <p className="product__price"><span className="visually-hidden">Цена:</span>{camera.price} ₽</p>
                 <button className="btn btn--purple" type="button">
                   <svg width="24" height="16" aria-hidden="true">
                     <use xlinkHref="#icon-add-basket"></use>
@@ -37,23 +38,22 @@ const ProductPage = (): JSX.Element => (
                     <div className="tabs__element">
                       <ul className="product__tabs-list">
                         <li className="item-list"><span className="item-list__title">Артикул:</span>
-                          <p className="item-list__text"> DA4IU67AD5</p>
+                          <p className="item-list__text"> {camera.vendorCode}</p>
                         </li>
                         <li className="item-list"><span className="item-list__title">Категория:</span>
-                          <p className="item-list__text">Видеокамера</p>
+                          <p className="item-list__text">{camera.category}</p>
                         </li>
                         <li className="item-list"><span className="item-list__title">Тип камеры:</span>
-                          <p className="item-list__text">Коллекционная</p>
+                          <p className="item-list__text">{camera.type}</p>
                         </li>
                         <li className="item-list"><span className="item-list__title">Уровень:</span>
-                          <p className="item-list__text">Любительский</p>
+                          <p className="item-list__text">{camera.level}</p>
                         </li>
                       </ul>
                     </div>
                     <div className="tabs__element is-active">
                       <div className="product__tabs-text">
-                        <p>Немецкий концерн BRW разработал видеокамеру Das Auge IV в&nbsp;начале 80-х годов, однако она до&nbsp;сих пор пользуется популярностью среди коллекционеров и&nbsp;яростных почитателей старинной техники.</p>
-                        <p>Вы&nbsp;тоже можете прикоснуться к&nbsp;волшебству аналоговой съёмки, заказав этот чудо-аппарат. Кто знает, может с&nbsp;Das Auge IV&nbsp;начнётся ваш путь к&nbsp;наградам всех престижных кинофестивалей.</p>
+                        <p>{camera.description}</p>
                       </div>
                     </div>
                   </div>
