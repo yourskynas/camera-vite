@@ -1,3 +1,5 @@
+import { nanoid } from '@reduxjs/toolkit';
+import { cameras } from '../mocks/cameras';
 import ProductCard from '../product-card/product-card';
 
 const CatalogSection = (): JSX.Element => (
@@ -129,7 +131,7 @@ const CatalogSection = (): JSX.Element => (
                     </form>
                   </div>--> */}
           <div className="cards catalog__cards">
-            <ProductCard />
+            {cameras.map((camera) => <ProductCard key={nanoid()} camera={camera} />)}
           </div>
           {/* <div className="pagination">
                   <ul className="pagination__list">
