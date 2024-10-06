@@ -24,4 +24,9 @@ const NavLink = {
   AboutCompany: 'О компании',
 } as const;
 
-export { SOCIAL_MEDIA, ResourceLink, SupportLink, NavLink, FooterTitle };
+const AppRoute = {
+  Catalog: '/catalog',
+  Camera: '/camera/:id',
+} as const;
+
+export { SOCIAL_MEDIA, ResourceLink, SupportLink, NavLink, FooterTitle, AppRoute };

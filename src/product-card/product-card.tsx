@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import Rate from '../rate/rate';
 import { CameraType } from '../types';
+import { AppRoute } from '../constants';
 
 type ProductCardProps = {
   camera: CameraType;
@@ -22,8 +24,8 @@ const ProductCard = ({camera}: ProductCardProps): JSX.Element => (
     <div className="product-card__buttons">
       <button className="btn btn--purple product-card__btn" type="button">Купить
       </button>
-      <a className="btn btn--transparent" href="#">Подробнее
-      </a>
+      <Link className="btn btn--transparent" to={AppRoute.Camera}>Подробнее
+      </Link>
     </div>
   </div>
 );

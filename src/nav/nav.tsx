@@ -1,5 +1,6 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { NavLink } from '../constants';
+import { AppRoute, NavLink } from '../constants';
+import { Link } from 'react-router-dom';
 
 type NavItemProps = {
   link: typeof NavLink[keyof typeof NavLink];
@@ -7,7 +8,7 @@ type NavItemProps = {
 
 const NavItem = ({link}: NavItemProps): JSX.Element => (
   <li className="main-nav__item">
-    <a className="main-nav__link" href="catalog.html">{link}</a>
+    <Link className="main-nav__link" to={AppRoute.Catalog}>{link}</Link>
   </li>
 );
 
