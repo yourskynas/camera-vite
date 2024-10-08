@@ -5,9 +5,10 @@ import { AppRoute } from '../constants';
 
 type ProductCardProps = {
   camera: CameraType;
+  onClick: (camera: CameraType) => void;
 }
 
-const ProductCard = ({camera}: ProductCardProps): JSX.Element => (
+const ProductCard = ({camera, onClick}: ProductCardProps): JSX.Element => (
   <div className="product-card">
     <div className="product-card__img">
       <picture>
@@ -22,7 +23,7 @@ const ProductCard = ({camera}: ProductCardProps): JSX.Element => (
       </p>
     </div>
     <div className="product-card__buttons">
-      <button className="btn btn--purple product-card__btn" type="button">Купить
+      <button className="btn btn--purple product-card__btn" type="button" onClick={() => onClick(camera)}>Купить
       </button>
       <Link className="btn btn--transparent" to={AppRoute.Camera}>Подробнее
       </Link>

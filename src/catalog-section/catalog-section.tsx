@@ -1,8 +1,13 @@
 import { nanoid } from '@reduxjs/toolkit';
 import { cameras } from '../mocks/cameras';
 import ProductCard from '../product-card/product-card';
+import { CameraType } from '../types';
 
-const CatalogSection = (): JSX.Element => (
+type CatalogSectionProps = {
+  onClick: (camera: CameraType) => void;
+}
+
+const CatalogSection = ({onClick}: CatalogSectionProps): JSX.Element => (
   <section className="catalog">
     <div className="container">
       <h1 className="title title--h2">Каталог фото- и видеотехники</h1>
@@ -131,7 +136,7 @@ const CatalogSection = (): JSX.Element => (
                     </form>
                   </div>--> */}
           <div className="cards catalog__cards">
-            {cameras.map((camera) => <ProductCard key={nanoid()} camera={camera} />)}
+            {cameras.map((camera) => <ProductCard key={nanoid()} camera={camera} onClick={onClick} />)}
           </div>
           {/* <div className="pagination">
                   <ul className="pagination__list">
