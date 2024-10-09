@@ -1,7 +1,7 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { cameras } from '../mocks/cameras';
+import { cameras } from '../../mocks/cameras';
 import ProductCard from '../product-card/product-card';
-import { CameraType } from '../types';
+import { CameraType } from '../../types';
 
 type CatalogSectionProps = {
   onClick: (camera: CameraType) => void;

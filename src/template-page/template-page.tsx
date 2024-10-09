@@ -1,8 +1,8 @@
 import { Outlet, useMatch } from 'react-router-dom';
-import Header from '../header/header';
-import Footer from '../footer/footer';
+import Header from '../components/header/header';
+import Footer from '../components/footer/footer';
 import { AppRoute } from '../constants';
-import Anchor from '../anchor/anchor';
+import Anchor from '../components/anchor/anchor';
 
 const TemplatePage = (): JSX.Element => {
   const match = useMatch(AppRoute.Camera);

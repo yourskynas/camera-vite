@@ -1,5 +1,5 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { AppRoute, NavLink } from '../constants';
+import { AppRoute, NavLink } from '../../constants';
 import { Link } from 'react-router-dom';
 
 type NavItemProps = {

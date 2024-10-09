@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import Banner from '../banner/banner';
-import Breadcrumbs from '../breadcrumbs/breadcrumbs';
-import CatalogSection from '../catalog-section/catalog-section';
+import Banner from '../components/banner/banner';
+import Breadcrumbs from '../components/breadcrumbs/breadcrumbs';
+import CatalogSection from '../components/catalog-section/catalog-section';
 import { CameraType } from '../types';
-import CallItem from '../call-item/call-item';
+import CallItem from '../components/call-item/call-item';
 
 const CatalogPage = (): JSX.Element => {
   const [ isActiveModal, setIsActiveModal ] = useState<boolean>(false);

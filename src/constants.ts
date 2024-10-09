@@ -27,6 +27,7 @@ const NavLink = {
 const AppRoute = {
   Catalog: '/catalog',
   Camera: '/camera/:id',
+  NotFound: '*'
 } as const;
 
 export { SOCIAL_MEDIA, ResourceLink, SupportLink, NavLink, FooterTitle, AppRoute };
