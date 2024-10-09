@@ -1,7 +1,7 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { reviews } from '../mocks/reviews';
+import { reviews } from '../../mocks/reviews';
 import Rate from '../rate/rate';
-import { ReviewType } from '../types';
+import { ReviewType } from '../../types';
 
 type ReviewItemProps = {
   review: ReviewType;

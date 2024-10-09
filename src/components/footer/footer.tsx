@@ -1,8 +1,8 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { FooterTitle, SOCIAL_MEDIA } from '../constants';
+import { FooterTitle, SOCIAL_MEDIA } from '../../constants';
 import Logo from '../logo/logo';
-import { FooterTitleType, NavLinkType, ResourceLinkType, SupportLinkType } from '../types';
-import { getLinksByTitle } from '../utils';
+import { FooterTitleType, NavLinkType, ResourceLinkType, SupportLinkType } from '../../types';
+import { getLinksByTitle } from '../../utils';
 
 type FooterNavItemProps = {
   title: FooterTitleType;

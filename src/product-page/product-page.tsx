@@ -1,7 +1,7 @@
-import Breadcrumbs from '../breadcrumbs/breadcrumbs';
+import Breadcrumbs from '../components/breadcrumbs/breadcrumbs';
 import { camera } from '../mocks/camera';
-import Rate from '../rate/rate';
-import Review from '../review/review';
+import Rate from '../components/rate/rate';
+import Review from '../components/review/review';
 
 const ProductPage = (): JSX.Element => (
   <div className="page-content">

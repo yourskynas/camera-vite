@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { CameraType } from '../types';
+import { CameraType } from '../../types';
 
 const STYLE_ERROR = {
   color: 'red',
