@@ -16,11 +16,13 @@ const App = (): JSX.Element => {
   };
 
   useEffect(() => {
-    if (isActiveModal) {
+    let isMounted = true;
+    if (isActiveModal && isMounted) {
       document.body.classList.add('scroll-lock');
     }
 
     return () => {
+      isMounted = false;
       document.body.classList.remove('scroll-lock');
     };
   }, [isActiveModal]);
