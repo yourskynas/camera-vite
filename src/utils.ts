@@ -11,3 +11,12 @@ export const getLinksByTitle = (title: FooterTitleType) => {
       return SupportLink;
   }
 };
+
+export const humanizingDate = (value: string) => {
+  const date = new Date(value);
+  const formatedDate = date.toLocaleDateString('ru', {
+    month: 'long',
+    day: '2-digit'
+  });
+  return formatedDate;
+};
