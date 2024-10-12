@@ -6,6 +6,7 @@ import SimilarSection from '../components/similar-section/similar-section';
 import { cameras } from '../mocks/cameras';
 import { CameraType } from '../types';
 import { useState } from 'react';
+import Button from '../components/button/button';
 
 type ProductPageProps = {
   onClick: (camera: CameraType) => void;
@@ -51,8 +52,8 @@ const ProductPage = ({onClick}: ProductPageProps): JSX.Element => {
               </button>
               <div className="tabs product__tabs">
                 <div className="tabs__controls product__tabs-controls">
-                  <button className={`tabs__control ${activeCharacteristics}`} type="button" onClick={handleCharacteristicsButtonClick}>Характеристики</button>
-                  <button className={`tabs__control ${activeDescription}`} type="button" onClick={handleDescriptionButtonClick}>Описание</button>
+                  <Button activeElement={activeCharacteristics} onClick={handleCharacteristicsButtonClick} textElement='Характеристики' />
+                  <Button activeElement={activeDescription} onClick={handleDescriptionButtonClick} textElement='Описание' />
                 </div>
                 <div className="tabs__content">
                   <div className={`tabs__element ${activeCharacteristics}`}>
