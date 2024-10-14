@@ -44,7 +44,7 @@ const ProductPage = ({onClick}: ProductPageProps): JSX.Element => {
             <div className="product__content">
               <h1 className="title title--h3">{camera.name}</h1>
               <Rate placeInContent='product__rate' />
-              <p className="product__price"><span className="visually-hidden">Цена:</span>{camera.price} ₽</p>
+              <p className="product__price"><span className="visually-hidden">Цена:</span>{(camera.price).toLocaleString('ru')} ₽</p>
               <button className="btn btn--purple" type="button">
                 <svg width="24" height="16" aria-hidden="true">
                   <use xlinkHref="#icon-add-basket"></use>
