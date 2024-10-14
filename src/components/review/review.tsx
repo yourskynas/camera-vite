@@ -40,8 +40,8 @@ const Review = (): JSX.Element => {
   const STEP = 3;
   const startCount = 0;
 
-  const sortedReviews = reviews.slice(startCount, endCount)
-    .sort((first, second) => new Date(second.createAt).getTime() - new Date(first.createAt).getTime());
+  const sortedReviews = reviews.sort((first, second) => new Date(second.createAt).getTime() - new Date(first.createAt).getTime())
+    .slice(startCount, endCount);
 
   const showNextReviews = () => sortedReviews.slice(startCount, endCount);
 
