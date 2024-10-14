@@ -1,16 +1,46 @@
-const Banner = (): JSX.Element => (
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination, Autoplay } from 'swiper/modules';
+import { promo } from '../../mocks/promo';
+import { nanoid } from '@reduxjs/toolkit';
+import { PromoType } from '../../types';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../constants';
+
+type BannerItemType = {
+  promoItem: PromoType;
+}
+
+const BannerItem = ({promoItem}: BannerItemType): JSX.Element => (
   <div className="banner">
     <picture>
-      <source type="image/webp" srcSet="img/content/banner-bg.webp, img/content/banner-bg@2x.webp 2x" />
-      <img src="img/content/banner-bg.jpg" srcSet="img/content/banner-bg@2x.jpg 2x" width="1280" height="280" alt="баннер" />
+      <source type="image/webp" srcSet={`${promoItem.previewImgWebp}, ${promoItem.previewImgWebp2x} 2x`} />
+      <img src={promoItem.previewImg} srcSet={`${promoItem.previewImg2x} 2x`} width="1280" height="280" alt={promoItem.name} />
     </picture>
     <p className="banner__info">
       <span className="banner__message">Новинка!</span>
-      <span className="title title--h1">Cannonball&nbsp;Pro&nbsp;MX&nbsp;8i</span>
+      <span className="title title--h1">{promoItem.name}</span>
       <span className="banner__text">Профессиональная камера от&nbsp;известного производителя</span>
-      <a className="btn" href="#">Подробнее</a>
+      <Link className="btn" to={AppRoute.Camera}>Подробнее</Link>
     </p>
   </div>
+);
+
+const Banner = (): JSX.Element => (
+  <Swiper
+    spaceBetween={30}
+    autoplay={{
+      delay: 3000,
+    }}
+    pagination={{
+      clickable: true,
+    }}
+    modules={[Autoplay, Pagination]}
+    className="mySwiper"
+  >
+    {promo.map((promoItem) => <SwiperSlide key={nanoid()}><BannerItem promoItem={promoItem} /></SwiperSlide>)}
+  </Swiper>
 );
 
 export default Banner;
