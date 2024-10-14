@@ -1,28 +1,20 @@
-import { useState } from 'react';
 import Banner from '../components/banner/banner';
 import Breadcrumbs from '../components/breadcrumbs/breadcrumbs';
 import CatalogSection from '../components/catalog-section/catalog-section';
 import { CameraType } from '../types';
-import CallItem from '../components/call-item/call-item';
 
-const CatalogPage = (): JSX.Element => {
-  const [ isActiveModal, setIsActiveModal ] = useState<boolean>(false);
-  const [ activeProduct, setActiveProduct ] = useState<CameraType | null>();
-  const handleButtonClick = (camera: CameraType | null) => {
-    setIsActiveModal(!isActiveModal);
-    setActiveProduct(camera);
-  };
+type CatalogPageProps = {
+  onClick: (camera: CameraType) => void;
+}
 
-  return (
-    <>
-      <Banner />
-      <div className="page-content">
-        <Breadcrumbs />
-        <CatalogSection onClick={handleButtonClick} />
-        {isActiveModal && activeProduct && <CallItem activeProduct={activeProduct} onClick={handleButtonClick} />}
-      </div>
-    </>
-  );
-};
+const CatalogPage = ({onClick}: CatalogPageProps): JSX.Element => (
+  <>
+    <Banner />
+    <div className="page-content">
+      <Breadcrumbs />
+      <CatalogSection onClick={onClick} />
+    </div>
+  </>
+);
 
 export default CatalogPage;
