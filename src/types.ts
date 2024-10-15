@@ -8,9 +8,7 @@ export type SupportLinkType = typeof SupportLink[keyof typeof SupportLink];
 
 export type NavLinkType = typeof NavLink[keyof typeof NavLink];
 
-export type CameraType = {
-  id: number;
-  name: string;
+export type CameraType = PromoType & {
   vendorCode: string;
   type: string;
   category: string;
@@ -19,10 +17,6 @@ export type CameraType = {
   price: number;
   rating: number;
   reviewCount: number;
-  previewImg: string;
-  previewImg2x: string;
-  previewImgWebp: string;
-  previewImgWebp2x: string;
 };
 
 export type ReviewType = {
@@ -34,4 +28,13 @@ export type ReviewType = {
   disadvantage: string;
   review: string;
   rating: number;
+};
+
+export type PromoType = {
+  id: number;
+  name: string;
+  previewImg: string;
+  previewImg2x: string;
+  previewImgWebp: string;
+  previewImgWebp2x: string;
 };

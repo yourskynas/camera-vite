@@ -100,7 +100,7 @@ const CallItem = ({activeProduct, onClick}: CallItemProps): JSX.Element => {
                 <li className="basket-item__list-item">{category}</li>
                 <li className="basket-item__list-item">{level} уровень</li>
               </ul>
-              <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{price} ₽</p>
+              <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{price.toLocaleString('ru')} ₽</p>
             </div>
           </div>
           <div className="custom-input form-review__item">

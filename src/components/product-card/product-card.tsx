@@ -20,7 +20,7 @@ const ProductCard = ({camera, onClick, similarStyle}: ProductCardProps): JSX.Ele
     <div className="product-card__info">
       <Rate placeInContent="product-card__rate" rating={camera.rating} reviewCount={camera.reviewCount} />
       <p className="product-card__title">{camera.name}</p>
-      <p className="product-card__price"><span className="visually-hidden">Цена:</span>{camera.price} ₽
+      <p className="product-card__price"><span className="visually-hidden">Цена:</span>{(camera.price).toLocaleString('ru')} ₽
       </p>
     </div>
     <div className="product-card__buttons">
