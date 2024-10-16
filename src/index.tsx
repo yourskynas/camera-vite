@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { fetchCamerasAction } from './store/api-actions';
+
+store.dispatch(fetchCamerasAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -8,6 +14,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <ToastContainer />
+      <App />
+    </Provider>
   </React.StrictMode>
 );

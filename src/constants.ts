@@ -30,4 +30,16 @@ const AppRoute = {
   NotFound: '*'
 } as const;
 
-export { SOCIAL_MEDIA, ResourceLink, SupportLink, NavLink, FooterTitle, AppRoute };
+const APIRoute = {
+  Cameras: '/cameras',
+  Coupons: '/coupons',
+  Reviews: '/reviews',
+  Promo: '/promo',
+  Similar: '/similar',
+} as const;
+
+const NameSpace = {
+  Data: 'DATA',
+} as const;
+
+export { SOCIAL_MEDIA, ResourceLink, SupportLink, NavLink, FooterTitle, AppRoute, APIRoute, NameSpace };
