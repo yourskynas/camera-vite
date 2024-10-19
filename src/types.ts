@@ -38,3 +38,9 @@ export type PromoType = {
   previewImgWebp: string;
   previewImgWebp2x: string;
 };
+
+export type OrderType = {
+  camerasIds: number[];
+  coupon: string | null;
+  tel?: string;
+};
