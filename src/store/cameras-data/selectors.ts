@@ -16,3 +16,5 @@ export const selectIsCameraError = (state: Selector) => state[NameSpace.Data].is
 export const selectSimilar = (state: Selector) => state[NameSpace.Data].similar;
 
 export const selectReviews = (state: Selector) => state[NameSpace.Data].reviews;
+
+export const selectPromo = (state: Selector) => state[NameSpace.Data].promo;

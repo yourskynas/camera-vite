@@ -36,10 +36,16 @@ const APIRoute = {
   Reviews: '/reviews',
   Promo: '/promo',
   Similar: '/similar',
+  Order: '/orders'
 } as const;
 
 const NameSpace = {
   Data: 'DATA',
 } as const;
 
-export { SOCIAL_MEDIA, ResourceLink, SupportLink, NavLink, FooterTitle, AppRoute, APIRoute, NameSpace };
+const TitlePlug = {
+  NotFound: '404 Not Found',
+  IsLoading: 'Loading...'
+} as const;
+
+export { SOCIAL_MEDIA, ResourceLink, SupportLink, NavLink, FooterTitle, AppRoute, APIRoute, NameSpace, TitlePlug };
