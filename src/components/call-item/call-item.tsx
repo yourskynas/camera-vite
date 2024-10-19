@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import { CameraType } from '../../types';
+import { useAppDispatch } from '../../hooks';
+import { orderAction } from '../../store/api-actions';
 
 const STYLE_ERROR = {
   color: 'red',
@@ -30,8 +32,10 @@ const CallItem = ({activeProduct, onClick}: CallItemProps): JSX.Element => {
   const [errorText, setErrorText] = useState<string | null>(null);
   const [formatedPhone, setFormatedPhone] = useState<string | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
-  const { name, vendorCode, previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, category, level, price } = activeProduct;
+  const { name, vendorCode, previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, category, level, price, id } = activeProduct;
 
   const closePopup = () => {
     onClick(null);
@@ -73,9 +77,20 @@ const CallItem = ({activeProduct, onClick}: CallItemProps): JSX.Element => {
 
   const handleButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
-    // следующая конструкция, чтобы не ругался линтер, удалить после использования переменной
+    setIsSubmit(true);
     if (formatedPhone) {
-      return formatedPhone;
+      dispatch(orderAction({
+        camerasIds: [id],
+        coupon: null,
+        tel: formatedPhone
+      })).then((response) => {
+        if (response.meta.requestStatus === 'fulfilled') {
+          setIsSubmit(false);
+          closePopup();
+        }
+      }).catch(() => {
+        setIsSubmit(false);
+      });
     }
   };
 
@@ -88,8 +103,8 @@ const CallItem = ({activeProduct, onClick}: CallItemProps): JSX.Element => {
           <div className="basket-item basket-item--short">
             <div className="basket-item__img">
               <picture>
-                <source type="image/webp" srcSet={`${previewImgWebp + previewImgWebp2x} + '2x'`} />
-                <img src={previewImg} srcSet={`${previewImg2x} + '2x'`} width="140" height="120" alt={name} />
+                <source type="image/webp" srcSet={`/${previewImgWebp}, ${previewImgWebp2x} + '2x'`} />
+                <img src={previewImg} srcSet={`/${previewImg2x} + '2x'`} width="140" height="120" alt={name} />
               </picture>
             </div>
             <div className="basket-item__description">
@@ -116,7 +131,7 @@ const CallItem = ({activeProduct, onClick}: CallItemProps): JSX.Element => {
           </div>
           {errorText !== null && <ErrorItem message={errorText} />}
           <div className="modal__buttons">
-            <button className="btn btn--purple modal__btn modal__btn--fit-width" onClick={(evt) => handleButtonClick(evt)} type="button" disabled={isError}>
+            <button className="btn btn--purple modal__btn modal__btn--fit-width" onClick={(evt) => handleButtonClick(evt)} type="button" disabled={isError || isSubmit}>
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
               </svg>Заказать

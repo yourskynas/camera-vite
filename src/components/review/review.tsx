@@ -1,9 +1,13 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { reviews } from '../../mocks/reviews';
 import Rate from '../rate/rate';
 import { ReviewType } from '../../types';
 import { humanizingDate } from '../../utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { fetchReviewsAction } from '../../store/api-actions';
+import { useSelector } from 'react-redux';
+import { selectReviews } from '../../store/cameras-data/selectors';
 
 type ReviewItemProps = {
   review: ReviewType;
@@ -36,16 +40,32 @@ const ReviewItem = ({review}: ReviewItemProps): JSX.Element => {
 
 const Review = (): JSX.Element => {
   const [endCount, setEndCount] = useState<number>(3);
+  const dispatch = useAppDispatch();
 
   const STEP = 3;
   const startCount = 0;
+  const params = useParams();
+  const cameraId = params.id || '';
 
-  const sortedReviews = reviews.sort((first, second) => new Date(second.createAt).getTime() - new Date(first.createAt).getTime())
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      dispatch(fetchReviewsAction(cameraId));
+    }
+    return () => {
+      isMounted = false;
+      setEndCount(3);
+    };
+  }, [dispatch, cameraId]);
+
+  const reviews = useSelector(selectReviews);
+
+  const sortedReviews = [...reviews].sort((first, second) => new Date(second.createAt).getTime() - new Date(first.createAt).getTime())
     .slice(startCount, endCount);
 
   const showNextReviews = () => sortedReviews.slice(startCount, endCount);
 
-  const isHidden = reviews.length <= STEP || sortedReviews.length < endCount;
+  const isHidden = reviews.length <= STEP || reviews.length <= endCount;
 
   const handleButtonClick = () => {
     setEndCount(endCount + STEP);
@@ -55,10 +75,11 @@ const Review = (): JSX.Element => {
   return (
     <section className="review-block">
       <div className="container">
-        <div className="page-content__headed">
-          <h2 className="title title--h3">Отзывы</h2>
-          {/* <button className="btn" type="button">Оставить свой отзыв</button> */}
-        </div>
+        {sortedReviews.length !== 0 && (
+          <div className="page-content__headed">
+            <h2 className="title title--h3">Отзывы</h2>
+          </div>
+        )}
         <ul className="review-block__list">
           {sortedReviews.map((review) => <ReviewItem key={nanoid()} review={review} />)}
         </ul>

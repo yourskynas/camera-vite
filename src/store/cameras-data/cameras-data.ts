@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CameraType, ReviewType } from '../../types';
-import { fetchCameraAction, fetchCamerasAction, fetchReviewsAction, fetchSimilarAction } from '../api-actions';
+import { CameraType, PromoType, ReviewType } from '../../types';
+import { fetchCameraAction, fetchCamerasAction, fetchPromoAction, fetchReviewsAction, fetchSimilarAction } from '../api-actions';
 import { NameSpace } from '../../constants';
 
 type CamerasData = {
@@ -8,14 +8,11 @@ type CamerasData = {
   camera: CameraType | null;
   reviews: ReviewType[];
   similar: CameraType[];
+  promo: PromoType[];
   isCamerasDataLoading: boolean;
   isCamerasError: boolean;
   isCameraDataLoading: boolean;
   isCameraError: boolean;
-  isReviewsDataLoading: boolean;
-  isReviewsError: boolean;
-  isSimilarDataLoading: boolean;
-  isSimilarError: boolean;
 };
 
 const initialState: CamerasData = {
@@ -23,14 +20,11 @@ const initialState: CamerasData = {
   camera: null,
   reviews: [],
   similar: [],
+  promo: [],
   isCamerasDataLoading: false,
   isCamerasError: false,
   isCameraDataLoading: false,
   isCameraError: false,
-  isReviewsDataLoading: false,
-  isReviewsError: false,
-  isSimilarDataLoading: false,
-  isSimilarError: false,
 };
 
 export const camerasData = createSlice({
@@ -63,29 +57,14 @@ export const camerasData = createSlice({
         state.camera = action.payload;
         state.isCameraDataLoading = false;
       })
-      .addCase(fetchReviewsAction.pending, (state) => {
-        state.isReviewsDataLoading = true;
-        state.isReviewsError = false;
-      })
-      .addCase(fetchReviewsAction.rejected, (state) => {
-        state.isReviewsDataLoading = false;
-        state.isReviewsError = true;
-      })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
-        state.isReviewsDataLoading = false;
-      })
-      .addCase(fetchSimilarAction.pending, (state) => {
-        state.isSimilarDataLoading = true;
-        state.isSimilarError = false;
-      })
-      .addCase(fetchSimilarAction.rejected, (state) => {
-        state.isSimilarDataLoading = false;
-        state.isSimilarError = true;
       })
       .addCase(fetchSimilarAction.fulfilled, (state, action) => {
         state.similar = action.payload;
-        state.isSimilarDataLoading = false;
+      })
+      .addCase(fetchPromoAction.fulfilled, (state, action) => {
+        state.promo = action.payload;
       });
   }
 });
