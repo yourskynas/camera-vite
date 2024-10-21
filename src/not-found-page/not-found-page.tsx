@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute, TitlePlug } from '../constants';
 
 type NotFoundPageProps = {
-  title?: typeof TitlePlug[keyof typeof TitlePlug];
+  title?: string;
 }
 
 const NotFoundPage = ({title = TitlePlug.NotFound}: NotFoundPageProps): JSX.Element => (
