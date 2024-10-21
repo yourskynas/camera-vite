@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import { CameraType } from '../../types';
 import { useAppDispatch } from '../../hooks';
 import { orderAction } from '../../store/api-actions';
+import { CameraType } from '../../types';
 
 const STYLE_ERROR = {
   color: 'red',
@@ -125,7 +125,7 @@ const CallItem = ({activeProduct, onClick}: CallItemProps): JSX.Element => {
                   <use xlinkHref="#icon-snowflake"></use>
                 </svg>
               </span>
-              <input type="tel" name="user-tel" placeholder="Введите ваш номер" ref={phoneRef} required onKeyDown={(evt) => handleKeyDown(evt)} onChange={() => handleInputChange(phoneRef.current?.value)} />
+              <input type="tel" name="user-tel" placeholder="Введите ваш номер" ref={phoneRef} required onKeyDown={(evt) => handleKeyDown(evt)} onChange={() => handleInputChange(phoneRef.current?.value)} data-testid="phone" />
             </label>
             <p className="custom-input__error">Нужно указать номер</p>
           </div>

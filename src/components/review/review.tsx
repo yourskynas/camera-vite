@@ -13,7 +13,7 @@ type ReviewItemProps = {
   review: ReviewType;
 }
 
-const ReviewItem = ({review}: ReviewItemProps): JSX.Element => {
+export const ReviewItem = ({review}: ReviewItemProps): JSX.Element => {
   const { userName, advantage, disadvantage, review: reviewText, rating, createAt } = review;
   const formattedDate = humanizingDate(createAt);
   return (
@@ -73,7 +73,7 @@ const Review = (): JSX.Element => {
   };
 
   return (
-    <section className="review-block">
+    <section className="review-block" data-testid="review">
       <div className="container">
         {sortedReviews.length !== 0 && (
           <div className="page-content__headed">
