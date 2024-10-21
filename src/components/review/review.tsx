@@ -22,7 +22,7 @@ const ReviewItem = ({review}: ReviewItemProps): JSX.Element => {
         <p className="title title--h4">{userName}</p>
         <time className="review-card__data" dateTime="2022-04-13">{formattedDate}</time>
       </div>
-      {rating && <Rate placeInContent="review-card__rate" rating={rating} />}
+      <Rate placeInContent="review-card__rate" rating={rating} />
       <ul className="review-card__list">
         <li className="item-list"><span className="item-list__title">Достоинства:</span>
           <p className="item-list__text">{advantage}</p>

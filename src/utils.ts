@@ -1,5 +1,5 @@
 import { FooterTitle, NavLink, ResourceLink, SupportLink } from './constants';
-import { FooterTitleType, RatingType } from './types';
+import { FooterTitleType } from './types';
 
 export const getLinksByTitle = (title: FooterTitleType) => {
   switch(title) {
@@ -14,9 +14,6 @@ export const getLinksByTitle = (title: FooterTitleType) => {
 
 export const humanizingDate = (value: string) => {
   const date = new Date(value);
-  if (isNaN(date.getTime())) {
-    return '';
-  }
   const formatedDate = date.toLocaleDateString('ru', {
     month: 'long',
     day: '2-digit'
@@ -24,7 +21,7 @@ export const humanizingDate = (value: string) => {
   return formatedDate;
 };
 
-export const createRatingList = (rating: RatingType) => {
+export const createRatingList = (rating: number) => {
   switch (rating) {
     case 1:
       return [true, false, false, false, false];
