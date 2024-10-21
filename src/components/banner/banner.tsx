@@ -16,7 +16,7 @@ type BannerItemType = {
   promoItem: PromoType;
 }
 
-const BannerItem = ({promoItem}: BannerItemType): JSX.Element => (
+export const BannerItem = ({promoItem}: BannerItemType): JSX.Element => (
   <div className="banner">
     <picture>
       <source type="image/webp" srcSet={`${promoItem.previewImgWebp}, ${promoItem.previewImgWebp2x} 2x`} />
