@@ -17,7 +17,7 @@ type SocialItemProps = {
 }
 
 const SocialItem = ({social}: SocialItemProps): JSX.Element => (
-  <li className="social__item">
+  <li className="social__item" data-testid='social-item'>
     <a className="link" href="#" aria-label={`Переход на страницу ${social}`}>
       <svg width="20" height="20" aria-hidden="true">
         <use xlinkHref={`#icon-${social}`}></use>
@@ -36,7 +36,7 @@ const FooterItem = ({link}: FooterItemProps): JSX.Element => (
 const FooterNavItem = ({title}: FooterNavItemProps): JSX.Element => {
   const links = getLinksByTitle(title);
   return (
-    <li className="footer__nav-item">
+    <li className="footer__nav-item" data-testid='footer-nav-item'>
       <p className="footer__title">{title}</p>
       <ul className="footer__list">
         {Object.values(links).map((link) => <FooterItem key={nanoid()} link={link} />)}

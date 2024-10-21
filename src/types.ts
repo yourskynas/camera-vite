@@ -27,7 +27,7 @@ export type ReviewType = {
   advantage: string;
   disadvantage: string;
   review: string;
-  rating: number;
+  rating: RatingType;
 };
 
 export type PromoType = {
@@ -44,3 +44,5 @@ export type OrderType = {
   coupon: string | null;
   tel?: string;
 };
+
+export type RatingType = 5 | 4 | 3 | 2 | 1;

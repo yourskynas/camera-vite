@@ -1,9 +1,10 @@
 import { nanoid } from '@reduxjs/toolkit';
 import { createRatingList } from '../../utils';
+import { RatingType } from '../../types';
 
 type RateProps = {
   placeInContent: string;
-  rating?: number;
+  rating?: RatingType;
   reviewCount?: number;
 }
 
@@ -26,7 +27,7 @@ const Rate = ({placeInContent, rating, reviewCount}: RateProps): JSX.Element => 
     <div className={`rate ${placeInContent}`}>
       {ratingList && ratingList.map((value) => <RateItem key={nanoid()} rating={value} />)}
       <p className="visually-hidden">Рейтинг: {rating}</p>
-      {placeInContent !== 'review-card__rate' && (
+      {placeInContent !== 'review-card__rate' && reviewCount && (
         <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
       )}
     </div>
