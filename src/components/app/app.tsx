@@ -6,6 +6,7 @@ import TemplatePage from '../../template-page/template-page';
 import NotFoundPage from '../../not-found-page/not-found-page';
 import { useEffect, useState } from 'react';
 import { CameraType } from '../../types';
+import { HelmetProvider } from 'react-helmet-async';
 
 const App = (): JSX.Element => {
   const [ isActiveModal, setIsActiveModal ] = useState<boolean>(false);
@@ -28,16 +29,18 @@ const App = (): JSX.Element => {
   }, [isActiveModal]);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<TemplatePage activeProduct={activeProduct} isActiveModal={isActiveModal} onClick={handleButtonClick} />}>
-          <Route index element={<Navigate to={AppRoute.Catalog} />} />
-          <Route path={AppRoute.Catalog} element={<CatalogPage onClick={handleButtonClick} />} />
-          <Route path={AppRoute.Camera} element={<ProductPage onClick={handleButtonClick} />} />
-          <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<TemplatePage activeProduct={activeProduct} isActiveModal={isActiveModal} onClick={handleButtonClick} />}>
+            <Route index element={<Navigate to={AppRoute.Catalog} />} />
+            <Route path={AppRoute.Catalog} element={<CatalogPage onClick={handleButtonClick} />} />
+            <Route path={AppRoute.Camera} element={<ProductPage onClick={handleButtonClick} />} />
+            <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 };
 
