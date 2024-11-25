@@ -1,6 +1,7 @@
 import { nanoid } from '@reduxjs/toolkit';
 import ProductCard from '../product-card/product-card';
 import { CameraType } from '../../types';
+import CatalogSort from '../catalog-sort/catalog-sort';
 
 type CatalogSectionProps = {
   onClick: (camera: CameraType) => void;
@@ -15,6 +16,7 @@ const CatalogSection = ({onClick, cameras}: CatalogSectionProps): JSX.Element =>
         <div className="catalog__aside"><img src="img/banner.png" />
         </div>
         <div className="catalog__content">
+          <CatalogSort />
           <div className="cards catalog__cards">
             {cameras.map((camera) => <ProductCard key={nanoid()} camera={camera} onClick={onClick} />)}
           </div>

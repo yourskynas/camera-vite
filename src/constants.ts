@@ -41,6 +41,7 @@ const APIRoute = {
 
 const NameSpace = {
   Data: 'DATA',
+  Main: 'MAIN'
 } as const;
 
 const TitlePlug = {
@@ -48,4 +49,14 @@ const TitlePlug = {
   IsLoading: 'Loading...'
 } as const;
 
-export { SOCIAL_MEDIA, ResourceLink, SupportLink, NavLink, FooterTitle, AppRoute, APIRoute, NameSpace, TitlePlug };
+const SortType = {
+  ByPrice: 'sortPrice',
+  ByPopular: 'sortPopular',
+} as const;
+
+const Direction = {
+  Up: 'up',
+  Down: 'down',
+} as const;
+
+export { SOCIAL_MEDIA, ResourceLink, SupportLink, NavLink, FooterTitle, AppRoute, APIRoute, NameSpace, TitlePlug, Direction, SortType };
