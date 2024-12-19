@@ -1,9 +1,9 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import CatalogPage from '../../catalog-page/catalog-page';
+import CatalogPage from '../../pages/catalog-page/catalog-page';
 import { AppRoute } from '../../constants';
-import ProductPage from '../../product-page/product-page';
-import TemplatePage from '../../template-page/template-page';
-import NotFoundPage from '../../not-found-page/not-found-page';
+import ProductPage from '../../pages/product-page/product-page';
+import TemplatePage from '../../pages/template-page/template-page';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { useEffect, useState } from 'react';
 import { CameraType } from '../../types';
 import { HelmetProvider } from 'react-helmet-async';

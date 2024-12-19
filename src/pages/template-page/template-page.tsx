@@ -1,13 +1,13 @@
 import { Outlet, useMatch } from 'react-router-dom';
-import Header from '../components/header/header';
-import Footer from '../components/footer/footer';
-import { AppRoute } from '../constants';
-import Anchor from '../components/anchor/anchor';
-import { CameraType } from '../types';
-import AddCamera from '../components/add-camera/add-camera';
-import { useAppSelector } from '../hooks';
-import { selectIsContinue } from '../store/main-process/selectors';
-import ContinueItem from '../components/continue-item/continue-item';
+import Header from '../../components/header/header';
+import Footer from '../../components/footer/footer';
+import { AppRoute } from '../../constants';
+import Anchor from '../../components/anchor/anchor';
+import { CameraType } from '../../types';
+import AddCamera from '../../components/add-camera/add-camera';
+import { useAppSelector } from '../../hooks';
+import { selectIsContinue } from '../../store/main-process/selectors';
+import ContinueItem from '../../components/continue-item/continue-item';
 
 type TemplatePageProps = {
   activeProduct: CameraType | null | undefined;

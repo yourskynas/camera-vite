@@ -1,18 +1,18 @@
-import Breadcrumbs from '../components/breadcrumbs/breadcrumbs';
-import Rate from '../components/rate/rate';
-import Review from '../components/review/review';
-import SimilarSection from '../components/similar-section/similar-section';
-import { cameras } from '../mocks/cameras';
-import { CameraType } from '../types';
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
+import Rate from '../../components/rate/rate';
+import Review from '../../components/review/review';
+import SimilarSection from '../../components/similar-section/similar-section';
+import { cameras } from '../../mocks/cameras';
+import { CameraType } from '../../types';
 import { useEffect, useState } from 'react';
-import Button from '../components/button/button';
+import Button from '../../components/button/button';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchCameraAction, fetchSimilarAction } from '../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchCameraAction, fetchSimilarAction } from '../../store/api-actions';
 import { useSelector } from 'react-redux';
-import { selectCamera, selectIsCameraDataLoading, selectIsCameraError, selectSimilar } from '../store/cameras-data/selectors';
+import { selectCamera, selectIsCameraDataLoading, selectIsCameraError, selectSimilar } from '../../store/cameras-data/selectors';
 import NotFoundPage from '../not-found-page/not-found-page';
-import { TitlePlug } from '../constants';
+import { TitlePlug } from '../../constants';
 
 type ProductPageProps = {
   onClick: (camera: CameraType) => void;

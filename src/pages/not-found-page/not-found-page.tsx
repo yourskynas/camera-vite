@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, TitlePlug } from '../constants';
+import { AppRoute, TitlePlug } from '../../constants';
 
 type NotFoundPageProps = {
   title?: typeof TitlePlug[keyof typeof TitlePlug];
