@@ -4,11 +4,15 @@ import { Direction, NameSpace, SortType } from '../../constants';
 type MainState = {
   sortType: string;
   direction: string;
+  shoppingCart: number[];
+  isContinue: boolean;
 }
 
 const initialState: MainState = {
   sortType: SortType.ByPrice,
   direction: Direction.Up,
+  shoppingCart: [],
+  isContinue: false,
 };
 
 export const mainProcess = createSlice({
@@ -20,7 +24,13 @@ export const mainProcess = createSlice({
     },
     changeDirection: (state, action: PayloadAction<string>) => {
       state.direction = action.payload;
+    },
+    addToCart: (state, action: PayloadAction<number>) => {
+      state.shoppingCart.push(action.payload);
+    },
+    changeIsContinue: (state, action: PayloadAction<boolean>) => {
+      state.isContinue = action.payload;
     }
   }
 });
-export const { changeSortType, changeDirection } = mainProcess.actions;
+export const { changeSortType, changeDirection, addToCart, changeIsContinue } = mainProcess.actions;
