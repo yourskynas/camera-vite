@@ -27,7 +27,8 @@ const NavLink = {
 const AppRoute = {
   Catalog: '/catalog',
   Camera: '/camera/:id',
-  NotFound: '*'
+  NotFound: '*',
+  Basket: '/card'
 } as const;
 
 const APIRoute = {
