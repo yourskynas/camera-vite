@@ -5,10 +5,6 @@ import { CameraType } from '../../types';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 
-type FormSearchProps = {
-  basketCount?: number;
-}
-
 type SelectItemProps = {
   name: string;
   onClick: () => void;
@@ -53,7 +49,7 @@ const SelectItem = ({name, onClick, cameras, hoverCamera}: SelectItemProps): JSX
   );
 };
 
-const FormSearch = ({basketCount}: FormSearchProps): JSX.Element => {
+const FormSearch = (): JSX.Element => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [cursor, setCursor] = useState<number>(-1);
   const selectList = useRef<null | HTMLUListElement>(null);
@@ -138,40 +134,32 @@ const FormSearch = ({basketCount}: FormSearchProps): JSX.Element => {
   };
 
   return (
-    <>
-      <div className="form-search">
-        <form onKeyDown={(evt) => handleFormKeyDown(evt)}>
-          <label>
-            <svg className="form-search__icon" width="16" height="16" aria-hidden="true">
-              <use xlinkHref="#icon-lens"></use>
-            </svg>
-            <input
-              className="form-search__input"
-              type="text"
-              autoComplete="off"
-              placeholder="Поиск по сайту"
-              value={searchValue}
-              onChange={(evt) => setSearchValue(evt.target.value)}
-            />
-          </label>
-          <ul className="form-search__select-list" ref={selectList}>
-            {foundCameraNames
-              .map((cameraName) => <SelectItem key={cameraName} name={cameraName} onClick={handleSelectItemClick} cameras={cameras} hoverCamera={foundCameraNames[cursor]} />)}
-          </ul>
-        </form>
-        <button className="form-search__reset" type="reset" ref={resetButton} onClick={handleResetButtonClick}>
-          <svg width="10" height="10" aria-hidden="true">
-            <use xlinkHref="#icon-close"></use>
-          </svg><span className="visually-hidden">Сбросить поиск</span>
-        </button>
-      </div>
-      <a className="header__basket-link" href="#">
-        <svg width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-basket"></use>
-        </svg>
-        {basketCount && <span className="header__basket-count">{basketCount}</span>}
-      </a>
-    </>
+    <div className="form-search">
+      <form onKeyDown={(evt) => handleFormKeyDown(evt)}>
+        <label>
+          <svg className="form-search__icon" width="16" height="16" aria-hidden="true">
+            <use xlinkHref="#icon-lens"></use>
+          </svg>
+          <input
+            className="form-search__input"
+            type="text"
+            autoComplete="off"
+            placeholder="Поиск по сайту"
+            value={searchValue}
+            onChange={(evt) => setSearchValue(evt.target.value)}
+          />
+        </label>
+        <ul className="form-search__select-list" ref={selectList}>
+          {foundCameraNames
+            .map((cameraName) => <SelectItem key={cameraName} name={cameraName} onClick={handleSelectItemClick} cameras={cameras} hoverCamera={foundCameraNames[cursor]} />)}
+        </ul>
+      </form>
+      <button className="form-search__reset" type="reset" ref={resetButton} onClick={handleResetButtonClick}>
+        <svg width="10" height="10" aria-hidden="true">
+          <use xlinkHref="#icon-close"></use>
+        </svg><span className="visually-hidden">Сбросить поиск</span>
+      </button>
+    </div>
   );
 };
 
