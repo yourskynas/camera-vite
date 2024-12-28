@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../hooks';
-import { addToCart, changeIsContinue } from '../../store/main-process/main-process';
+import { addToCart, changeIsAddToCart, changeIsContinue } from '../../store/main-process/main-process';
 import { CameraType } from '../../types';
 
 type AddCameraProps = {
@@ -8,7 +8,7 @@ type AddCameraProps = {
 }
 const AddCamera = ({activeProduct, onClick}: AddCameraProps): JSX.Element => {
 
-  const { name, vendorCode, previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, category, level, price, id } = activeProduct;
+  const { name, vendorCode, previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, category, level, price } = activeProduct;
   const dispatch = useAppDispatch();
 
   const handleModalClose = () => {
@@ -16,8 +16,9 @@ const AddCamera = ({activeProduct, onClick}: AddCameraProps): JSX.Element => {
   };
 
   const handleButtonClick = () => {
-    dispatch(addToCart(id));
+    dispatch(addToCart(activeProduct));
     dispatch(changeIsContinue(true));
+    dispatch(changeIsAddToCart(false));
   };
 
   return (
@@ -29,8 +30,8 @@ const AddCamera = ({activeProduct, onClick}: AddCameraProps): JSX.Element => {
           <div className="basket-item basket-item--short">
             <div className="basket-item__img">
               <picture>
-                <source type="image/webp" srcSet={`/${previewImgWebp}, ${previewImgWebp2x} + '2x'`} />
-                <img src={previewImg} srcSet={`/${previewImg2x} + '2x'`} width="140" height="120" alt={name} />
+                <source type="image/webp" srcSet={`/${previewImgWebp}, ${previewImgWebp2x} 2x`} />
+                <img src={previewImg} srcSet={`/${previewImg2x} 2x`} width="140" height="120" alt={name} />
               </picture>
             </div>
             <div className="basket-item__description">

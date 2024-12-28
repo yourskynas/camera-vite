@@ -8,3 +8,7 @@ export const selectSortType = (state: Selector) => state[NameSpace.Main].sortTyp
 export const selectShoppingCart = (state: Selector) => state[NameSpace.Main].shoppingCart;
 
 export const selectIsContinue = (state: Selector) => state[NameSpace.Main].isContinue;
+
+export const selectIsClearCart = (state: Selector) => state[NameSpace.Main].isClearCart;
+
+export const selectIsAddToCart = (state: Selector) => state[NameSpace.Main].isAddToCart;

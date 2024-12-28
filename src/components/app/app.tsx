@@ -37,7 +37,7 @@ const App = (): JSX.Element => {
             <Route index element={<Navigate to={AppRoute.Catalog} />} />
             <Route path={AppRoute.Catalog} element={<CatalogPage onClick={handleButtonClick} />} />
             <Route path={AppRoute.Camera} element={<ProductPage onClick={handleButtonClick} />} />
-            <Route path={AppRoute.Basket} element={<BasketPage />} />
+            <Route path={AppRoute.Basket} element={<BasketPage onClick={handleButtonClick} />} />
             <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
           </Route>
         </Routes>

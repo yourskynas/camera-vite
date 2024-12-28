@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { selectCamera, selectIsCameraDataLoading, selectIsCameraError, selectSimilar } from '../../store/cameras-data/selectors';
 import NotFoundPage from '../not-found-page/not-found-page';
 import { TitlePlug } from '../../constants';
+import { changeIsAddToCart } from '../../store/main-process/main-process';
 
 type ProductPageProps = {
   onClick: (camera: CameraType) => void;
@@ -49,6 +50,13 @@ const ProductPage = ({onClick}: ProductPageProps): JSX.Element => {
   const activeDescription = isActiveDescription ? 'is-active' : '';
   const activeCharacteristics = isActiveCharacteristics ? 'is-active' : '';
 
+  const handleButtonClick = () => {
+    if (camera) {
+      onClick(camera);
+    }
+    dispatch(changeIsAddToCart(true));
+  };
+
   const handleCharacteristicsButtonClick = () => {
     setIsActiveDescription(false);
     setIsActiveCharacteristics(true);
@@ -80,7 +88,7 @@ const ProductPage = ({onClick}: ProductPageProps): JSX.Element => {
                 <h1 className="title title--h3">{camera.name}</h1>
                 <Rate placeInContent='product__rate' />
                 <p className="product__price"><span className="visually-hidden">Цена:</span>{(camera.price).toLocaleString('ru')} ₽</p>
-                <button className="btn btn--purple" type="button" onClick={() => onClick(camera)}>
+                <button className="btn btn--purple" type="button" onClick={handleButtonClick}>
                   <svg width="24" height="16" aria-hidden="true">
                     <use xlinkHref="#icon-add-basket"></use>
                   </svg>Добавить в корзину
