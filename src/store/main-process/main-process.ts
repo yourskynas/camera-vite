@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Direction, NameSpace, SortType } from '../../constants';
 import { CameraType } from '../../types';
+import { ChangedQuanity } from '../types';
 
 type MainState = {
   sortType: string;
@@ -33,6 +34,28 @@ export const mainProcess = createSlice({
     addToCart: (state, action: PayloadAction<CameraType>) => {
       state.shoppingCart.push(action.payload);
     },
+    removeFromCart: (state, action: PayloadAction<number>) => {
+      let found = false;
+      state.shoppingCart = state.shoppingCart.filter((item) => {
+        if (item.id === action.payload && !found) {
+          found = true;
+          return false;
+        }
+        return true;
+      });
+    },
+    updateCameraQuanity: (state, action: PayloadAction<ChangedQuanity>) => {
+      const otherCameras = state.shoppingCart.filter((item) => item.id !== action.payload.id);
+      const cameraToUpdate = state.shoppingCart.filter((item) => item.id === action.payload.id);
+      if (cameraToUpdate.length === 0) {
+        state.shoppingCart = otherCameras;
+      }
+      const updatedCameras: CameraType[] = [];
+      for (let i = 0; i < action.payload.targetQuanity; i++) {
+        updatedCameras.push({...cameraToUpdate[0]});
+      }
+      state.shoppingCart = [...otherCameras, ...updatedCameras];
+    },
     changeIsAddToCart: (state, action: PayloadAction<boolean>) => {
       state.isAddToCart = action.payload;
     },
@@ -47,4 +70,4 @@ export const mainProcess = createSlice({
     }
   }
 });
-export const { changeSortType, changeDirection, addToCart, changeIsAddToCart, changeIsContinue, clearCart, changeIsClearCart } = mainProcess.actions;
+export const { changeSortType, changeDirection, addToCart, removeFromCart, updateCameraQuanity, changeIsAddToCart, changeIsContinue, clearCart, changeIsClearCart } = mainProcess.actions;

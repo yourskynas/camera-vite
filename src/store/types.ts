@@ -5,3 +5,8 @@ export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export type Selector = Pick<State, keyof State>;
+
+export type ChangedQuanity = {
+  id: number;
+  targetQuanity: number;
+};

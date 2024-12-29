@@ -4,7 +4,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectShoppingCart } from '../../store/main-process/selectors';
 import { CameraType } from '../../types';
 import { groupById } from '../../utils';
-import { changeIsClearCart } from '../../store/main-process/main-process';
+import { addToCart, changeIsClearCart, removeFromCart, updateCameraQuanity } from '../../store/main-process/main-process';
+import useDynamicPricing from '../../hooks/use-dynamic-pricing';
+import { useState } from 'react';
 
 type BasketItemProps = {
   camera: CameraType;
@@ -17,9 +19,48 @@ type BasketPageProps = {
 }
 
 const BasketItem = ({camera, count, onClick}: BasketItemProps) => {
+  const [changedCount, setCount] = useState(count.toString());
   const dispatch = useAppDispatch();
   const {name: cameraName, vendorCode, previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, category, level, price } = camera;
   const totalPrice = price * count;
+
+  const handleNextButtonClick = () => {
+    if (Number(changedCount) === 9) {
+      return changedCount;
+    }
+    setCount((Number(changedCount) + 1).toString());
+    dispatch(addToCart(camera));
+  };
+
+  const handlePrevButtonClick = () => {
+    if (Number(changedCount) === 1) {
+      return changedCount;
+    }
+    setCount((Number(changedCount) - 1).toString());
+    dispatch(removeFromCart(camera.id));
+  };
+
+  const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const value = evt.target.value;
+    const valueNumber = Number(evt.target.value);
+    if (value === '') {
+      setCount('');
+      return;
+    }
+    if (isNaN(valueNumber)) {
+      return;
+    }
+    if (valueNumber < 1) {
+      setCount('1');
+      dispatch(updateCameraQuanity({id: camera.id, targetQuanity: 1}));
+    } else if (valueNumber > 9) {
+      setCount('9');
+      dispatch(updateCameraQuanity({id: camera.id, targetQuanity: 9}));
+    } else {
+      setCount(value);
+      dispatch(updateCameraQuanity({id: camera.id, targetQuanity: valueNumber}));
+    }
+  };
 
   const handleButtonClick = () => {
     onClick(camera);
@@ -45,14 +86,14 @@ const BasketItem = ({camera, count, onClick}: BasketItemProps) => {
       </div>
       <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{price.toLocaleString('ru')} ₽</p>
       <div className="quantity">
-        <button className="btn-icon btn-icon--prev" aria-label="уменьшить количество товара">
+        <button className="btn-icon btn-icon--prev" aria-label="уменьшить количество товара" onClick={handlePrevButtonClick}>
           <svg width="7" height="12" aria-hidden="true">
             <use xlinkHref="#icon-arrow"></use>
           </svg>
         </button>
         <label className="visually-hidden" htmlFor="counter1"></label>
-        <input type="number" id="counter1" defaultValue={count} min="1" max="9" aria-label="количество товара"/>
-        <button className="btn-icon btn-icon--next" aria-label="увеличить количество товара">
+        <input type="number" id="counter1" value={changedCount} aria-label="количество товара" onChange={handleInputChange}/>
+        <button className="btn-icon btn-icon--next" aria-label="увеличить количество товара" onClick={handleNextButtonClick}>
           <svg width="7" height="12" aria-hidden="true">
             <use xlinkHref="#icon-arrow"></use>
           </svg>
@@ -73,7 +114,7 @@ const BasketPage = ({onClick}: BasketPageProps) => {
 
   const groupedById = groupById(basket);
   const basketItems = Object.values(groupedById);
-  const totalPrice = basket.reduce((sum, item) => sum + item.price, 0);
+  const { totalPrice, discountAmount, finalPrice } = useDynamicPricing(basket);
 
   return (
     <div className="page-content">
@@ -103,8 +144,8 @@ const BasketPage = ({onClick}: BasketPageProps) => {
             </div>
             <div className="basket__summary-order">
               <p className="basket__summary-item"><span className="basket__summary-text">Всего:</span><span className="basket__summary-value">{totalPrice.toLocaleString('ru')} ₽</span></p>
-              <p className="basket__summary-item"><span className="basket__summary-text">Скидка:</span><span className="basket__summary-value basket__summary-value--bonus">0 ₽</span></p>
-              <p className="basket__summary-item"><span className="basket__summary-text basket__summary-text--total">К оплате:</span><span className="basket__summary-value basket__summary-value--total">111 390 ₽</span></p>
+              <p className="basket__summary-item"><span className="basket__summary-text">Скидка:</span><span className="basket__summary-value basket__summary-value--bonus">{discountAmount.toLocaleString('ru')} ₽</span></p>
+              <p className="basket__summary-item"><span className="basket__summary-text basket__summary-text--total">К оплате:</span><span className="basket__summary-value basket__summary-value--total">{finalPrice.toLocaleString('ru')} ₽</span></p>
               <button className="btn btn--purple" type="submit">Оформить заказ
               </button>
             </div>
