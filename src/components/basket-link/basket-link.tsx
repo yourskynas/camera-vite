@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../hooks';
-import { selectShoppingCart } from '../store/main-process/selectors';
-import { AppRoute } from '../constants';
+import { useAppSelector } from '../../hooks';
+import { selectShoppingCart } from '../../store/main-process/selectors';
+import { AppRoute } from '../../constants';
 
 const BasketLink = () => {
   const basket = useAppSelector(selectShoppingCart);

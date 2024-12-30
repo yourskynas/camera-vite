@@ -13,7 +13,7 @@ type CatalogPageProps = {
 }
 
 const CatalogPage = ({onClick}: CatalogPageProps): JSX.Element => {
-  const cameras = useAppSelector(selectCameras);
+  const cameras: CameraType[] = useAppSelector(selectCameras);
   const isLoading = useAppSelector(selectIsCamerasDataLoading);
   const isError = useAppSelector(selectIsCamerasError);
   const sortingDirection = useAppSelector(selectDirection);
@@ -21,7 +21,7 @@ const CatalogPage = ({onClick}: CatalogPageProps): JSX.Element => {
 
   const sortCameras = (items: CameraType[], key1: string, key2: string): CameraType[] => {
     const sortingKey: keyof CameraType = key1 === SortType.ByPrice ? 'price' : 'rating';
-    return items.toSorted((a, b) => {
+    return items.slice().sort((a: CameraType, b: CameraType) => {
       const comparision = a[sortingKey] - b[sortingKey];
       return key2 === Direction.Up ? comparision : -comparision;
     });

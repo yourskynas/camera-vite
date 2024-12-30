@@ -1,4 +1,4 @@
-import BasketLink from '../../basket-link/basket-link';
+import BasketLink from '../basket-link/basket-link';
 import FormSearch from '../form-search/form-search';
 import Logo from '../logo/logo';
 import Nav from '../nav/nav';
