@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { CameraType, PromoType, ReviewType } from '../../types';
-import { fetchCameraAction, fetchCamerasAction, fetchPromoAction, fetchReviewsAction, fetchSimilarAction } from '../api-actions';
+import { fetchCameraAction, fetchCamerasAction, fetchPromoAction, fetchReviewsAction, fetchSimilarAction, orderAction } from '../api-actions';
 import { NameSpace } from '../../constants';
 
 type CamerasData = {
@@ -13,6 +13,8 @@ type CamerasData = {
   isCamerasError: boolean;
   isCameraDataLoading: boolean;
   isCameraError: boolean;
+  isOrderPosting: boolean;
+  isOrderPostingError: boolean;
 };
 
 const initialState: CamerasData = {
@@ -25,6 +27,8 @@ const initialState: CamerasData = {
   isCamerasError: false,
   isCameraDataLoading: false,
   isCameraError: false,
+  isOrderPosting: false,
+  isOrderPostingError: false,
 };
 
 export const camerasData = createSlice({
@@ -65,6 +69,17 @@ export const camerasData = createSlice({
       })
       .addCase(fetchPromoAction.fulfilled, (state, action) => {
         state.promo = action.payload;
+      })
+      .addCase(orderAction.pending, (state) => {
+        state.isOrderPosting = true;
+        state.isOrderPostingError = false;
+      })
+      .addCase(orderAction.rejected, (state) => {
+        state.isOrderPosting = false;
+        state.isOrderPostingError = true;
+      })
+      .addCase(orderAction.fulfilled, (state) => {
+        state.isOrderPosting = false;
       });
   }
 });

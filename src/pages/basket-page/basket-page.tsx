@@ -4,9 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectShoppingCart } from '../../store/main-process/selectors';
 import { CameraType } from '../../types';
 import { groupById } from '../../utils';
-import { addToCart, changeIsClearCart, removeFromCart, updateCameraQuanity } from '../../store/main-process/main-process';
+import { addToCart, changeIsClearCart, emptyBasket, removeFromCart, setErrorStatus, setPostStatus, updateCameraQuanity } from '../../store/main-process/main-process';
 import useDynamicPricing from '../../hooks/use-dynamic-pricing';
 import { useState } from 'react';
+import { orderAction } from '../../store/api-actions';
+import { selectIsOrderPosting } from '../../store/cameras-data/selectors';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../constants';
 
 type BasketItemProps = {
   camera: CameraType;
@@ -110,11 +114,33 @@ const BasketItem = ({camera, count, onClick}: BasketItemProps) => {
 };
 
 const BasketPage = ({onClick}: BasketPageProps) => {
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const basket: CameraType[] = useAppSelector(selectShoppingCart);
+  const isOrderPosting = useAppSelector(selectIsOrderPosting);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
+  const coupon = 'camera-333';
   const groupedById = groupById(basket);
   const basketItems = Object.values(groupedById);
   const { totalPrice, discountAmount, finalPrice } = useDynamicPricing(basket);
+
+  const handleButtonSubmit = () => {
+    setIsDisabled(!isDisabled);
+    const allId = Object.keys(groupedById).map((item) => Number(item));
+    dispatch(orderAction({camerasIds: allId, coupon}))
+      .then((response) => {
+        if (response.meta.requestStatus === 'fulfilled') {
+          setIsDisabled(!isDisabled);
+          dispatch(emptyBasket());
+          dispatch(setPostStatus(true));
+          navigate(AppRoute.Catalog);
+        } else if (response.meta.requestStatus === 'rejected') {
+          dispatch(setErrorStatus(true));
+          setIsDisabled(false);
+        }
+      });
+  };
 
   return (
     <div className="page-content">
@@ -146,7 +172,7 @@ const BasketPage = ({onClick}: BasketPageProps) => {
               <p className="basket__summary-item"><span className="basket__summary-text">Всего:</span><span className="basket__summary-value">{totalPrice.toLocaleString('ru')} ₽</span></p>
               <p className="basket__summary-item"><span className="basket__summary-text">Скидка:</span><span className="basket__summary-value basket__summary-value--bonus">{discountAmount.toLocaleString('ru')} ₽</span></p>
               <p className="basket__summary-item"><span className="basket__summary-text basket__summary-text--total">К оплате:</span><span className="basket__summary-value basket__summary-value--total">{finalPrice.toLocaleString('ru')} ₽</span></p>
-              <button className="btn btn--purple" type="submit">Оформить заказ
+              <button className="btn btn--purple" type="submit" onClick={handleButtonSubmit} disabled={basket.length === 0 || isDisabled}>{!isOrderPosting ? 'Оформить заказ' : 'Идет оформление заказа'}
               </button>
             </div>
           </div>

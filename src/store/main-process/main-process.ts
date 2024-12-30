@@ -10,6 +10,8 @@ type MainState = {
   isContinue: boolean;
   isClearCart: boolean;
   isAddToCart: boolean;
+  isPostSuccess: boolean;
+  isError: boolean;
 }
 
 const initialState: MainState = {
@@ -19,6 +21,8 @@ const initialState: MainState = {
   isContinue: false,
   isClearCart: false,
   isAddToCart: false,
+  isPostSuccess: false,
+  isError: false,
 };
 
 export const mainProcess = createSlice({
@@ -67,7 +71,16 @@ export const mainProcess = createSlice({
     },
     changeIsClearCart: (state, action: PayloadAction<boolean>) => {
       state.isClearCart = action.payload;
+    },
+    emptyBasket: (state) => {
+      state.shoppingCart = [];
+    },
+    setPostStatus: (state, action: PayloadAction<boolean>) => {
+      state.isPostSuccess = action.payload;
+    },
+    setErrorStatus: (state, action: PayloadAction<boolean>) => {
+      state.isError = action.payload;
     }
   }
 });
-export const { changeSortType, changeDirection, addToCart, removeFromCart, updateCameraQuanity, changeIsAddToCart, changeIsContinue, clearCart, changeIsClearCart } = mainProcess.actions;
+export const { changeSortType, changeDirection, addToCart, removeFromCart, updateCameraQuanity, changeIsAddToCart, changeIsContinue, clearCart, changeIsClearCart, emptyBasket, setPostStatus, setErrorStatus } = mainProcess.actions;

@@ -46,7 +46,6 @@ export type PromoType = {
 export type OrderType = {
   camerasIds: number[];
   coupon: string | null;
-  tel?: string;
 };
 
 export type RatingType = number;
