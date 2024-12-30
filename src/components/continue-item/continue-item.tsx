@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 import { useAppDispatch } from '../../hooks';
 import { changeIsContinue } from '../../store/main-process/main-process';
@@ -9,6 +9,7 @@ type ContinueItemProps = {
 
 const ContinueItem = ({onClick}: ContinueItemProps) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const handleModalClose = () => {
     onClick(null);
     dispatch(changeIsContinue(false));
@@ -25,7 +26,7 @@ const ContinueItem = ({onClick}: ContinueItemProps) => {
           </svg>
           <div className="modal__buttons" onClick={handleModalClose}>
             <Link className="btn btn--transparent modal__btn" to={AppRoute.Catalog}>Продолжить покупки</Link>
-            <button className="btn btn--purple modal__btn modal__btn--fit-width">Перейти в корзину</button>
+            <button className="btn btn--purple modal__btn modal__btn--fit-width" onClick={() => navigate(AppRoute.Basket)}>Перейти в корзину</button>
           </div>
           <button className="cross-btn" type="button" aria-label="Закрыть попап" onClick={handleModalClose}>
             <svg width="10" height="10" aria-hidden="true">

@@ -1,5 +1,5 @@
 import { FooterTitle, NavLink, ResourceLink, SupportLink } from './constants';
-import { FooterTitleType, RatingType } from './types';
+import { CameraType, FooterTitleType, RatingType } from './types';
 
 export const getLinksByTitle = (title: FooterTitleType) => {
   switch(title) {
@@ -40,4 +40,12 @@ export const createRatingList = (rating: RatingType) => {
       return [false, false, false, false, false];
   }
 };
+
+export const groupById = (items: CameraType[]): Record<number, CameraType[]> => items.reduce((acc, item) => {
+  if (!acc[item.id]) {
+    acc[item.id] = [];
+  }
+  acc[item.id].push(item);
+  return acc;
+}, {} as Record<number, CameraType[]>);
 

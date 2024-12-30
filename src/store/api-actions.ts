@@ -70,7 +70,7 @@ export const orderAction = createAsyncThunk<void, OrderType, {
   extra: AxiosInstance;
 }>(
   'user/order',
-  async ({camerasIds, coupon, tel}: OrderType, {extra: api}) => {
-    await api.post(APIRoute.Order, {camerasIds, coupon, tel});
+  async ({camerasIds, coupon}: OrderType, {extra: api}) => {
+    await api.post(APIRoute.Order, {camerasIds, coupon});
   },
 );

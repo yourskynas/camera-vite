@@ -1,18 +1,19 @@
-import Breadcrumbs from '../components/breadcrumbs/breadcrumbs';
-import Rate from '../components/rate/rate';
-import Review from '../components/review/review';
-import SimilarSection from '../components/similar-section/similar-section';
-import { cameras } from '../mocks/cameras';
-import { CameraType } from '../types';
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
+import Rate from '../../components/rate/rate';
+import Review from '../../components/review/review';
+import SimilarSection from '../../components/similar-section/similar-section';
+import { cameras } from '../../mocks/cameras';
+import { CameraType } from '../../types';
 import { useEffect, useState } from 'react';
-import Button from '../components/button/button';
+import Button from '../../components/button/button';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchCameraAction, fetchSimilarAction } from '../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchCameraAction, fetchSimilarAction } from '../../store/api-actions';
 import { useSelector } from 'react-redux';
-import { selectCamera, selectIsCameraDataLoading, selectIsCameraError, selectSimilar } from '../store/cameras-data/selectors';
+import { selectCamera, selectIsCameraDataLoading, selectIsCameraError, selectSimilar } from '../../store/cameras-data/selectors';
 import NotFoundPage from '../not-found-page/not-found-page';
-import { TitlePlug } from '../constants';
+import { TitlePlug } from '../../constants';
+import { changeIsAddToCart } from '../../store/main-process/main-process';
 
 type ProductPageProps = {
   onClick: (camera: CameraType) => void;
@@ -49,6 +50,13 @@ const ProductPage = ({onClick}: ProductPageProps): JSX.Element => {
   const activeDescription = isActiveDescription ? 'is-active' : '';
   const activeCharacteristics = isActiveCharacteristics ? 'is-active' : '';
 
+  const handleButtonClick = () => {
+    if (camera) {
+      onClick(camera);
+    }
+    dispatch(changeIsAddToCart(true));
+  };
+
   const handleCharacteristicsButtonClick = () => {
     setIsActiveDescription(false);
     setIsActiveCharacteristics(true);
@@ -80,7 +88,7 @@ const ProductPage = ({onClick}: ProductPageProps): JSX.Element => {
                 <h1 className="title title--h3">{camera.name}</h1>
                 <Rate placeInContent='product__rate' />
                 <p className="product__price"><span className="visually-hidden">Цена:</span>{(camera.price).toLocaleString('ru')} ₽</p>
-                <button className="btn btn--purple" type="button">
+                <button className="btn btn--purple" type="button" onClick={handleButtonClick}>
                   <svg width="24" height="16" aria-hidden="true">
                     <use xlinkHref="#icon-add-basket"></use>
                   </svg>Добавить в корзину

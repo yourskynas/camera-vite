@@ -13,6 +13,10 @@ export const selectIsCameraDataLoading = (state: Selector) => state[NameSpace.Da
 
 export const selectIsCameraError = (state: Selector) => state[NameSpace.Data].isCameraError;
 
+export const selectIsOrderPosting = (state: Selector) => state[NameSpace.Data].isOrderPosting;
+
+export const selectIsOrderPostingError = (state: Selector) => state[NameSpace.Data].isOrderPostingError;
+
 export const selectSimilar = (state: Selector) => state[NameSpace.Data].similar;
 
 export const selectReviews = (state: Selector) => state[NameSpace.Data].reviews;

@@ -1,12 +1,13 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import CatalogPage from '../../catalog-page/catalog-page';
+import CatalogPage from '../../pages/catalog-page/catalog-page';
 import { AppRoute } from '../../constants';
-import ProductPage from '../../product-page/product-page';
-import TemplatePage from '../../template-page/template-page';
-import NotFoundPage from '../../not-found-page/not-found-page';
+import ProductPage from '../../pages/product-page/product-page';
+import TemplatePage from '../../pages/template-page/template-page';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { useEffect, useState } from 'react';
 import { CameraType } from '../../types';
 import { HelmetProvider } from 'react-helmet-async';
+import BasketPage from '../../pages/basket-page/basket-page';
 
 const App = (): JSX.Element => {
   const [ isActiveModal, setIsActiveModal ] = useState<boolean>(false);
@@ -36,6 +37,7 @@ const App = (): JSX.Element => {
             <Route index element={<Navigate to={AppRoute.Catalog} />} />
             <Route path={AppRoute.Catalog} element={<CatalogPage onClick={handleButtonClick} />} />
             <Route path={AppRoute.Camera} element={<ProductPage onClick={handleButtonClick} />} />
+            <Route path={AppRoute.Basket} element={<BasketPage onClick={handleButtonClick} />} />
             <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
           </Route>
         </Routes>
