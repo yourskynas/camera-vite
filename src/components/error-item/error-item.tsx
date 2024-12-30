@@ -3,6 +3,7 @@ import { setErrorStatus } from '../../store/main-process/main-process';
 
 const ErrorItem = () => {
   const dispatch = useAppDispatch();
+
   const handleButtonClick = () => {
     dispatch(setErrorStatus(false));
   };

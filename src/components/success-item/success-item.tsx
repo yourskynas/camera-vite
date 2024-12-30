@@ -6,9 +6,11 @@ import { AppRoute } from '../../constants';
 const SuccessItem = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const handleModalClose = () => {
     dispatch(setPostStatus(false));
   };
+
   const handleButtonClick = () => {
     navigate(AppRoute.Catalog);
     dispatch(setPostStatus(false));

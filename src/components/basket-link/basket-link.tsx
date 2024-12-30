@@ -5,6 +5,7 @@ import { AppRoute } from '../../constants';
 
 const BasketLink = () => {
   const basket = useAppSelector(selectShoppingCart);
+
   return (
     <Link className="header__basket-link" to={basket.length > 0 ? AppRoute.Basket : AppRoute.Catalog}>
       <svg width="16" height="16" aria-hidden="true">

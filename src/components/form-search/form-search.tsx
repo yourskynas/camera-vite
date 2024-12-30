@@ -88,17 +88,17 @@ const FormSearch = (): JSX.Element => {
   };
 
   useEffect(() => {
+    const MIN_LETTER_FOR_RESET = 1;
+    const MIN_LETTER_FOR_SEARCH = 3;
     let isMounted = true;
-    const minLetterForReset = 1;
-    const minLetterForSearch = 3;
 
-    if (searchValue.length >= minLetterForReset && isMounted) {
+    if (searchValue.length >= MIN_LETTER_FOR_RESET && isMounted) {
       showResetButton();
     } else {
       hideResetButton();
     }
 
-    if (searchValue.length >= minLetterForSearch && isMounted && foundCameraNames.length !== 0) {
+    if (searchValue.length >= MIN_LETTER_FOR_SEARCH && isMounted && foundCameraNames.length !== 0) {
       openSearch();
     } else {
       closeSearch();

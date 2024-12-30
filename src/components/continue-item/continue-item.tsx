@@ -10,6 +10,7 @@ type ContinueItemProps = {
 const ContinueItem = ({onClick}: ContinueItemProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const handleModalClose = () => {
     onClick(null);
     dispatch(changeIsContinue(false));

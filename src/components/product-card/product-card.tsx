@@ -13,6 +13,7 @@ type ProductCardProps = {
 
 const ProductCard = ({camera, onClick, similarStyle}: ProductCardProps): JSX.Element => {
   const dispatch = useAppDispatch();
+
   const handleButtonClick = () => {
     onClick(camera);
     dispatch(changeIsAddToCart(true));

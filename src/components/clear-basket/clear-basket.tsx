@@ -14,6 +14,7 @@ const ClearBasket = ({activeProduct, onClick}: ClearBasketProps) => {
   const basket: CameraType[] = useAppSelector(selectShoppingCart);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const { name, vendorCode, previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, category, level } = activeProduct;
 
   const handleModalClose = () => {
