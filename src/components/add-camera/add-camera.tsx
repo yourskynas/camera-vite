@@ -6,8 +6,8 @@ type AddCameraProps = {
   activeProduct: CameraType;
   onClick: (camera: null) => void;
 }
-const AddCamera = ({activeProduct, onClick}: AddCameraProps): JSX.Element => {
 
+const AddCamera = ({activeProduct, onClick}: AddCameraProps): JSX.Element => {
   const { name, vendorCode, previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, category, level, price } = activeProduct;
   const dispatch = useAppDispatch();
 

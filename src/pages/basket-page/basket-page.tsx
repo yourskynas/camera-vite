@@ -117,13 +117,12 @@ const BasketPage = ({onClick}: BasketPageProps) => {
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const basket: CameraType[] = useAppSelector(selectShoppingCart);
   const isOrderPosting = useAppSelector(selectIsOrderPosting);
+  const { totalPrice, discountAmount, finalPrice } = useDynamicPricing(basket);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   const coupon = 'camera-333';
   const groupedById = groupById(basket);
   const basketItems = Object.values(groupedById);
-  const { totalPrice, discountAmount, finalPrice } = useDynamicPricing(basket);
 
   const handleButtonSubmit = () => {
     setIsDisabled(!isDisabled);

@@ -12,6 +12,7 @@ import BasketPage from '../../pages/basket-page/basket-page';
 const App = (): JSX.Element => {
   const [ isActiveModal, setIsActiveModal ] = useState<boolean>(false);
   const [ activeProduct, setActiveProduct ] = useState<CameraType | null>();
+
   const handleButtonClick = (camera: CameraType | null) => {
     setIsActiveModal(!isActiveModal);
     setActiveProduct(camera);
